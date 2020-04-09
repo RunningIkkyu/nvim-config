@@ -2,7 +2,7 @@
 
 ### 安装 `neovim`
 
-本文只写 `Linux` 的安装。
+本文只写 `Linux` 的安装。全部配置文件可以在 [`Github`](https://github.com/RunningIkkyu/nvim-config/blob/master/init.vim) 中查看。不定期更新该文件。
 
 由于仓库的 `neovim` 版本可能和最新版本有很大的差异，所以我选择手动下载安装。进入到 neovim 官网的 [`release`](https://github.com/neovim/neovim/releases) 页面。然后下载你需要的版本。这里以 `NVIM 0.4.3` 为例。
 
