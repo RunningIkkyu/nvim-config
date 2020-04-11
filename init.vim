@@ -13,7 +13,14 @@ Plug 'ryanoasis/vim-devicons'
 "Plug 'airblade/vim-gitgutter'
 "Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
+" Plugin offers tree view of files.
 Plug 'preservim/nerdtree'
+" Make NERDTree tabs more comfortable.
+Plug 'jistr/vim-nerdtree-tabs'
+
+
+" Fuzzy finder.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Beautify vim statsline.
 Plug 'vim-airline/vim-airline'
@@ -38,7 +45,23 @@ Plug 'junegunn/vim-easy-align'
 " Rainbow bracket to make bracket more readable.
 Plug 'luochen1990/rainbow'
 
+" Bring smooth scrolling to vim.
+Plug 'yuttie/comfortable-motion.vim'
+
+" Jedi vim, go to definition.
+" Plug 'davidhalter/jedi-vim'
+
+
 call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-easy-align settings.
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -68,15 +91,20 @@ let g:rainbow_active = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+" Open file in new tab by default.
+" let NERDTreeMapOpenInTab='<ENTER>'
+let NERDTreeCustomOpenArgs={'file':{'where': 't'}}
+
+
 " open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " map a specific key or shortcut to open NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Let NERDTree igonre files
 let NERDTreeIgnore = ['\.pyc$', '\.swp$', '__pycache__$']
