@@ -20,7 +20,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 
 
 " Fuzzy finder.
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Beautify vim statsline.
 Plug 'vim-airline/vim-airline'
@@ -48,11 +48,38 @@ Plug 'luochen1990/rainbow'
 " Bring smooth scrolling to vim.
 Plug 'yuttie/comfortable-motion.vim'
 
+" vim-go
+Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
+
+" Tagbar
+Plug 'majutsushi/tagbar'
+
+" Vim surrond
+Plug 'tpope/vim-surround'
+
+" Vim fzf, need install fzf first.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+
+" quick cscope
+"Plug 'ronakg/quickr-cscope.vim'
+
 " Jedi vim, go to definition.
 " Plug 'davidhalter/jedi-vim'
 
+" Multiple selection
+"Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" config for multiple selection
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" qucik cscope
+let g:quickr_cscope_keymaps = 0
+nmap <C-s>c <plug>(quickr_cscope_callers)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +92,12 @@ nmap ga <Plug>(EasyAlign)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fzf settings.
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+
 " nerdcommenter settings.
 " Use <ctrl-/> to toggle comments in code.
 nmap <C-_>   <Plug>NERDCommenterToggle
@@ -78,6 +111,10 @@ vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 let g:doge_doc_standard_python = 'google'
 " let g:doge_doc_standard_python = 'reST'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"fzf
+"let g:fzf_layout = { 'left': '~70%' }
+"let g:fzf_layout={'up': '70%'}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rainbow settings.
@@ -101,7 +138,9 @@ let NERDTreeCustomOpenArgs={'file':{'where': 't'}}
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " map a specific key or shortcut to open NERDTree
-map <C-n> :NERDTreeToggle<CR>
+"map <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+
 
 " close vim if the only window left open is a NERDTree
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -128,6 +167,26 @@ let g:airline_theme='badwolf'  "可以自定义主题，这里使用 badwolf
 "set statusline^=%{StatusDiagnostic()}%{get(b:,'coc_current_function','')}
 
 " autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tagbar settings
+nmap <F8> :TagbarToggle<CR>
+" Do not auto preview tag.
+let g:tagbar_autopreview=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim fzf
+" Always enable preview window on the right with 60% width
+"let g:fzf_preview_window = 'right:60%'
+
+" [Tags] Command to generate tags file
+"let g:fzf_tags_command = 'ctags -R'
+
+"" [[B]Commits] Customize the options used by 'git log':
+"let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+"" [Commands] --expect expression for directly executing the command
+"let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
